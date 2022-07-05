@@ -78,7 +78,7 @@ export class Timeline extends Component<Props, {}> {
 	public readonly items: DataSet<TimelineItem>;
 	public readonly groups: DataSet<TimelineGroup>;
 
-	#ref = React.createRef<HTMLDivElement>();
+	ref = React.createRef<HTMLDivElement>();
 
 	constructor(props: Props) {
 		super(props);
@@ -100,13 +100,14 @@ export class Timeline extends Component<Props, {}> {
 
 	componentDidMount() {
 		Object.defineProperty(this, 'timeline', {
-			value: new VisTimelineCtor(this.#ref.current, this.items, this.groups, this.props.options),
+			value: new VisTimelineCtor(this.ref.current, this.items, this.groups, this.props.options),
 			writable: false
 		});
 
 		for (const event of events) {
 			const eventHandler = this.props[`${event}Handler`];
 			if (eventHandler !== noop) {
+				// @ts-ignore
 				this.timeline.on(event, eventHandler);
 			}
 		}
@@ -222,6 +223,6 @@ export class Timeline extends Component<Props, {}> {
 	}
 
 	render() {
-		return <div ref={this.#ref} />;
+		return <div ref={this.ref} />;
 	}
 }

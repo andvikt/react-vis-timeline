@@ -11,7 +11,7 @@
     "sourceMap": true,
     "inlineSourceMap": false,
     "module": "esnext",
-    "target": "ES2019",
+    "target": "es5",
     "outDir": "./build/",
     "moduleResolution": "node",
     "jsx": "react",
